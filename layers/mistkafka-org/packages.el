@@ -44,4 +44,6 @@
            :section-numbers nil
            )
           ))
+  ;; org文件显示文本格式化后的样式
+  (setq org-hide-emphasis-markers t)
   )
