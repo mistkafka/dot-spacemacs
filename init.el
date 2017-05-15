@@ -89,7 +89,7 @@ values."
    dotspacemacs-command-key ":"
    dotspacemacs-remap-Y-to-y$ t
    dotspacemacs-default-layout-name "Default"
-   spacemacs-custom-file "~/.spacemacs.d/custom.el"
+   dotspacemacs-custom-file "~/.spacemacs.d/custom.el"
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
@@ -272,15 +272,6 @@ Don't mess with special buffers."
         (kill-new filename)
         (message "Copied buffer filename '%s' to the clipboard." filename))))
 
-
-  ;;================================================================================
-  ;; javascript config
-  ;;================================================================================
-  (setq js2-basic-offset 2)
-  (setq js2-indent-switch-body 2)
-  (setq js-indent-level 2)
-  (setq js2-mode-show-parse-errors nil)
-  (setq js2-mode-show-strict-warnings nil)
 
   ;; 删除备注：非常卡！
   ;; ;;================================================================================
