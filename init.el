@@ -247,32 +247,6 @@ you should place your code here."
     :config
     (setq mmm-submode-decoration-level 0))
 
-  ;;================================================================================
-  ;; kill others buffers
-  ;;================================================================================
-  (defun kill-other-buffers ()
-    "Kill all buffers but the current one.
-Don't mess with special buffers."
-    (interactive)
-    (dolist (buffer (buffer-list))
-      (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
-        (kill-buffer buffer))))
-  (global-set-key (kbd "C-c k") 'kill-other-buffers)
-
-  ;;================================================================================
-  ;; copy pathname to clipboard
-  ;;================================================================================
-  (defun copy-file-name-to-clipboard ()
-    "Copy the current buffer file name to the clipboard."
-    (interactive)
-    (let ((filename (if (equal major-mode 'dired-mode)
-                        default-directory
-                      (buffer-file-name))))
-      (when filename
-        (kill-new filename)
-        (message "Copied buffer filename '%s' to the clipboard." filename))))
-
-
   ;; 删除备注：非常卡！
   ;; ;;================================================================================
   ;; ;; flycheck config start
