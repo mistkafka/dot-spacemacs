@@ -89,7 +89,6 @@ values."
    dotspacemacs-command-key ":"
    dotspacemacs-remap-Y-to-y$ t
    dotspacemacs-default-layout-name "Default"
-   dotspacemacs-custom-file "~/.spacemacs.d/custom.el"
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
@@ -278,4 +277,12 @@ you should place your code here."
   ;;               :weight 'normal
   ;;               :slant 'normal
   ;;               :size 14.5)))
+  )
+(setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+(load custom-file 'no-error 'no-message)
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
   )
