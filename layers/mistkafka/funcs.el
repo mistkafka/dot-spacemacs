@@ -4,6 +4,18 @@
                     (buffer-file-name))))
     filename))
 
+(defun mistkafka/private-get-find-files (options)
+  "execute the `find' command with OPTIONS, return files"
+  (let ((tmp-buffer (uuidgen-4))
+        files)
+    (get-buffer-create tmp-buffer)
+    (shell-command (format "find %s" options) tmp-buffer)
+    (with-current-buffer tmp-buffer
+      (setq files (split-string (buffer-string) "\n"))
+      (delete-window)
+      (kill-buffer tmp-buffer))
+    files))
+
 (defun mistkafka/copy-file-name-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)
