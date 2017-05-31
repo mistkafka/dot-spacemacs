@@ -1,5 +1,5 @@
 (global-set-key (kbd "C-c C-f") 'projectile-find-file)
-(global-set-key (kbd "C-c f") 'helm-do-ag-project-root)
+(global-set-key (kbd "C-c f") 'helm-grep-do-git-grep)
 (global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "M-j") 'yas-expand)
+(global-set-key (kbd "C-j") 'yas-expand)
 (global-set-key (kbd "C-c k") 'spacemacs/kill-other-buffers)
