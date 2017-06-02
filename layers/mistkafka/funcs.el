@@ -28,13 +28,20 @@
   (interactive)
   (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
 
-(defun mistkafka/apple-open-current-file ()
+(defun mistkafka/apple-open-current-file (&optional app)
   "Use apple's command 'open' to open current file"
   (interactive)
   (let* ((filename (mistkafka/private-get-file-name))
          (cmd (format "open %s" filename)))
+    (if app
+        (setq cmd (format "%s -a %s" cmd app)))
     (and filename
          (shell-command cmd))))
+
+(defun mistkafka/pycharm-open-current-file ()
+  "open current file with pycharm"
+  (interactive)
+  (mistkafka/apple-open-current-file "Pycharm"))
 
 ;; TODO: 这个方法有如下几个待改进的点：
 ;;       1. 改成成只需要输入一个字符，如：输入'('或者')'即可知道是要用'()'包裹字符串
