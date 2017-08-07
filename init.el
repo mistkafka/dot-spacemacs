@@ -18,7 +18,6 @@ values."
 
      ;; Programming
      auto-completion
-     git
      sql
      python
      emacs-lisp
@@ -35,6 +34,7 @@ values."
      better-defaults
      xkcd
      games
+     restclient
 
      ;; My config layer
      mistkafka
@@ -66,9 +66,9 @@ values."
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
-   dotspacemacs-scratch-mode 'text-mode
-   dotspacemacs-themes '(sanityinc-solarized-light
-                         spacemacs-dark
+   dotspacemacs-scratch-mode 'org-mode
+   dotspacemacs-themes '(spacemacs-dark
+                         sanityinc-solarized-light
                          spacemacs-light
                          solarized-light
                          solarized-dark
