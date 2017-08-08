@@ -25,6 +25,7 @@ values."
      html
      javascript
      yaml
+     typescript
 
      ;; Mis
      themes-megapack
@@ -35,6 +36,8 @@ values."
      xkcd
      games
      restclient
+     (typescript :variables
+                 typescript-fmt-on-save t)
 
      ;; My config layer
      mistkafka
@@ -53,9 +56,10 @@ values."
   (setq-default
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
    ;; One of `vim', `emacs' or `hybrid'
-   dotspacemacs-editing-style 'hybrid
+   dotspacemacs-editing-style '(hybrid :variables
+                                       hybrid-mode-default-state 'insert)
    dotspacemacs-verbose-loading nil
    ;; `official'(default) or `random'
    dotspacemacs-startup-banner 'random
