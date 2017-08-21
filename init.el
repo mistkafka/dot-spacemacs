@@ -59,14 +59,14 @@ values."
    dotspacemacs-check-for-update nil
    ;; One of `vim', `emacs' or `hybrid'
    dotspacemacs-editing-style '(hybrid :variables
-                                       hybrid-mode-default-state 'insert)
+                                       hybrid-mode-default-state 'normal)
    dotspacemacs-verbose-loading nil
    ;; `official'(default) or `random'
    dotspacemacs-startup-banner 'random
    ;; Possible values are: `recents' `bookmarks' `projects'.
    dotspacemacs-startup-lists '((recents . 3)
                                 (projects . 3)
-                                (bookmarks . 3))
+                                (bookmarks . 15))
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
