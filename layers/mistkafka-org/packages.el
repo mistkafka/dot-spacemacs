@@ -5,6 +5,10 @@
   )
 
 (defun mistkafka-org/post-init-org ()
+  (setq habitica-uid "6d9dd62e-34fa-4ce7-a73b-d780dd5ec4f5")
+  (setq habitica-token "8dec866c-342d-4baa-876d-47cd34938a54")
+  (setq habitica-turn-on-highlighting t)
+  (setq habitica-show-streak t)
   (with-eval-after-load 'org
     (progn
       (setq org-todo-keywords
@@ -30,21 +34,21 @@
             '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
       ;; org-publish-project
-      (require 'ox-publish)
-      (setq org-publish-project-alist
-            '(
-              ("gitpage"
-               :base-directory "~/mistkafka.github.io/org/"
-               :base-extension "org"
-               :publishing-directory "~/mistkafka.github.io/_posts/"
-               :recursive t
-               :publishing-function org-html-publish-to-html
-               :html-extension "html"
+      ;; (require 'ox-publish)
+      ;; (setq org-publish-project-alist
+      ;;       '(
+      ;;         ("gitpage"
+      ;;          :base-directory "~/mistkafka.github.io/org/"
+      ;;          :base-extension "org"
+      ;;          :publishing-directory "~/mistkafka.github.io/_posts/"
+      ;;          :recursive t
+      ;;          :publishing-function org-html-publish-to-html
+      ;;          :html-extension "html"
 
-               :body-only t
-               :with-toc nil
-               :section-numbers nil
-               )
-              ))
+      ;;          :body-only t
+      ;;          :with-toc nil
+      ;;          :section-numbers nil
+      ;;          )
+      ;;         ))
       ;; org文件显示文本格式化后的样式
       (setq org-hide-emphasis-markers t))))

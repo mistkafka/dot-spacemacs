@@ -16,17 +16,55 @@
       (kill-buffer tmp-buffer))
     files))
 
-(defun mistkafka/copy-file-name-to-clipboard ()
+(defun mistkafka/private-get-git-root-path (current-path)
+  "get the CURRENT-PATH's git root path"
+      (vc-call-backend (vc-responsible-backend current-path) 'root current-path))
+
+(defun mistkafka/private-get-file-name-in-project ()
+  "Get current buffer file name in the current git project"
+  (let* ((filename (mistkafka/private-get-file-name))
+         (project-path (expand-file-name (mistkafka/private-get-git-root-path filename))))
+    (setq filename (replace-regexp-in-string project-path "/" filename))))
+
+(defun mistkafka/private-get-file-name-in-jsroot ()
+  "Get the current buffer file's js path. It's a hardcode implemented!"
+  (let ((filename (mistkafka/private-get-file-name))
+        (rootmark "/js/"))
+    (setq filename (substring filename
+                              (+ (string-match rootmark filename)
+                               (length rootmark))))))
+
+(defun mistkafka/private-copy-file-name-to-clipboard (filename)
+  "Utils, copy FILENAME to clipboard"
+  (when filename
+    (kill-new filename)
+    (message "Copied filename '%s' to the clipboard" filename)))
+
+(defun mistkafka/copy-file-name-in-system-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)
-  (let ((filename (mistkafka/private-get-file-name)))
-    (when filename
-      (kill-new filename)
-      (message "Copied buffer filename '%s' to the clipboard." filename))))
+  (mistkafka/private-copy-file-name-to-clipboard
+   (mistkafka/private-get-file-name)))
+
+(defun mistkafka/copy-file-name-in-project-to-clipboard ()
+  "Copy the current buffer file name in the current git project to the clipboard"
+  (interactive)
+  (mistkafka/private-copy-file-name-to-clipboard
+   (mistkafka/private-get-file-name-in-project)))
+
+(defun mistkafka/copy-file-name-in-jsroot-to-clipboard ()
+  "Copy the current buffer file's js path to the clipboard. It's a hardcode implemented!"
+  (interactive)
+  (mistkafka/private-copy-file-name-to-clipboard
+   (mistkafka/private-get-file-name-in-jsroot)))
 
 (defun mistkafka/insert-currrent-date ()
   (interactive)
   (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+
+(defun mistkafka/insert-currrent-datetime ()
+  (interactive)
+  (insert (shell-command-to-string "echo -n $(date '+%Y-%m-%d %H:%M:%S')")))
 
 (defun mistkafka/apple-open-current-file (&optional app)
   "Use apple's command 'open' to open current file"
@@ -58,3 +96,8 @@
           (delete-region from to)
           (goto-char from)
           (insert output-str)))))
+
+(defun mistkafka/shell (buffer-name)
+  "start my terminal with BUFFER-NAME"
+  (interactive "sTerminal Name:")
+  )

@@ -5,8 +5,7 @@
     ))
 
 (defun mistkafka-js/post-init-js ()
-  (setq js-indent-level 2)
-  )
+  (setq js-indent-level 2))
 
 (defun mistkafka-js/post-init-js2-mode ()
   (progn

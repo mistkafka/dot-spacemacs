@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: pdb
+# key: pdb
+# --
+try:
+  import pdb;pdb.set_trace()
+except:
+  pass
