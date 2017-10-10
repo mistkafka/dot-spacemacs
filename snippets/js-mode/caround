@@ -1,9 +1,8 @@
-# -*- mode: snippet -*-
-# name: caround
 # key: caround
+# name: caround
 # --
 compose.around(function (baseFun) {
-    return function($0) {
-        $1
+    return function ($1) {
+        $0
     };
-}),
+})$2

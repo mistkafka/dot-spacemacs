@@ -51,7 +51,9 @@ This function should only modify configuration layer settings."
 
      ;; emacs tools
      helm
-     auto-completion
+     (auto-completion :variables auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-snippets-in-popup t
+                      :disabled-for org markdown)
 
      ;; tools
      git
@@ -75,7 +77,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(vue-mode
                                       stylus-mode
                                       bing-dict
-                                      chinese-fonts-setup
+                                      cnfonts
                                       habitica)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

@@ -1,0 +1,6 @@
+# key: cbefore
+# name: cbefore
+# --
+compose.before(function($1) {
+    $0
+})$2

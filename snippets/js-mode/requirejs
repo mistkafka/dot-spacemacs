@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: requirejs
+# key: requirejs
+# --
+define([
+    $0
+], function($1) {
+    'use strict';
+
+    return $2
+});

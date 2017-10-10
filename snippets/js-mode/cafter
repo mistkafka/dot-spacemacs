@@ -1,0 +1,6 @@
+# key: cafter
+# name: cafter
+# --
+compose.after(function($1) {
+    $0
+})$2

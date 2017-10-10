@@ -3,4 +3,5 @@
                                       mistkafka-js
                                       mistkafka-sql
                                       mistkafka-ivy
+                                      mistkafka-python
                                       ))
