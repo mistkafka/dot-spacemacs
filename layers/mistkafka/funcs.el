@@ -101,3 +101,27 @@
   "start my terminal with BUFFER-NAME"
   (interactive "sTerminal Name:")
   )
+
+;; TODO: 抛弃vim改用emacs，range-things不易
+;;
+;; (defun mistkafka/private-do-range-things (begin-str, end-str)
+;;   "Range the string at point with wrapper begin with BEGIN-STR, and end with END-STR"
+;;   (push-mark (point))
+;;   (search-backward begin-str)
+;;   (push-mark (point) nil t)
+;;   (forward-char)
+;;   (search-forward end-str)
+;;   (backward-char))
+
+;; (defun mistkafka/private-range-things (things &optional end-str)
+;;   "Range the string at point with wrapper THINGS.
+;; If END-STR is gavend THINGS as the begin-str"
+;;   (let ((begin-str things))
+;;     (unless end-str
+;;       (setq end-str things))
+;;     (mistkafka/private-do-range-things begin-str end-str)))
+
+;; (defun mistkafka/range-things (things)
+;;   "Range the string at point with wrapper THING"
+;;   (interactive "sWrapper with things:")
+;;   (mistkafka/private-range-things things))
