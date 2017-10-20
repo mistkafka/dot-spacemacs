@@ -81,6 +81,13 @@
   (interactive)
   (mistkafka/apple-open-current-file "Pycharm"))
 
+(defun mistkafka/write-file-without-confirm (filename)
+  "write file without directory does'nt exists confirm"
+  (unless filename
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir)))))
+
 ;; TODO: 这个方法有如下几个待改进的点：
 ;;       1. 改成成只需要输入一个字符，如：输入'('或者')'即可知道是要用'()'包裹字符串
 ;;       2. 开启vim模式。在vim的正常模式下，选中一段文本，然后按下某个字符就会包裹字符串
@@ -101,6 +108,7 @@
   "start my terminal with BUFFER-NAME"
   (interactive "sTerminal Name:")
   )
+
 
 ;; TODO: 抛弃vim改用emacs，range-things不易
 ;;
