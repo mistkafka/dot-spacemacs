@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: setter-debugger
+# key: setter-dbg
+# --
+var s = Symbol('value');
+var handler = {
+    get () {
+        return this[s];
+    },
+
+    set (val) {
+        debugger
+        this[s] = val;
+    }
+}
+Reflect.defineProperty($1, $2, handler);
+
