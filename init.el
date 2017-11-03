@@ -31,6 +31,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(markdown
      yaml
+     treemacs
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -366,10 +367,10 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   ;; set emacs package mirrors
-  (setq configuration-layer--elpa-archives
-        '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-          ("org-cn"   . "http://elpa.emacs-china.org/org/")
-          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+  ;; (setq configuration-layer--elpa-archives
+  ;;       '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+  ;;         ("org-cn"   . "http://elpa.emacs-china.org/org/")
+  ;;         ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
 
   (with-eval-after-load 'org
     (setq org-match-substring-regexp
