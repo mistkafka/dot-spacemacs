@@ -4,4 +4,5 @@
                                       mistkafka-sql
                                       mistkafka-ivy
                                       mistkafka-python
+                                      mistkafka-gllue
                                       ))
