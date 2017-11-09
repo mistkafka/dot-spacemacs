@@ -104,11 +104,15 @@
           (goto-char from)
           (insert output-str)))))
 
-(defun mistkafka/shell (buffer-name)
-  "start my terminal with BUFFER-NAME"
-  (interactive "sTerminal Name:")
-  )
-
+;; http://guleilab.com/2016/05/05/OrgPomodoroNotifier/
+;; system notify
+(defun system-notify (title message)
+  (call-process "terminal-notifier"
+                nil 0 nil
+                "-group" "Emacs"
+                "-title" title
+                "-message" message
+                "-activate" "org.gnu.Emacs"))
 
 ;; TODO: 抛弃vim改用emacs，range-things不易
 ;;

@@ -73,4 +73,19 @@
       ;; 可以設定任何 ID 或是設成 nil 來使用對稱式加密 (symmetric encryption)
       (setq org-crypt-key nil)
       ;; >>>>>>>>>>>>>>>>>>>> org-crypt end
+
+      ;; <<<<<<<<<<<<<<<<<<<< org-pomodoro
+      ;; http://guleilab.com/2016/05/05/OrgPomodoroNotifier/
+      (add-hook 'org-pomodoro-finished-hook
+                (lambda ()
+                  (system-notify "Pomodoro completed!" "Time for a break.")))
+      (add-hook 'org-pomodoro-break-finished-hook
+                (lambda ()
+                  (system-notify "Pomodoro Short Break Finished" "Ready for Another?")))
+      (add-hook 'org-pomodoro-long-break-finished-hook
+                (lambda ()
+                  (system-notify "Pomodoro Long Break Finished" "Ready for Another?")))
+      (add-hook 'org-pomodoro-killed-hook
+                (lambda ()
+                  (system-notify "Pomodoro Killed" "One does not simply kill a pomodoro!")))
       )))

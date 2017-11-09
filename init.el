@@ -80,7 +80,8 @@ This function should only modify configuration layer settings."
                                       stylus-mode
                                       bing-dict
                                       cnfonts
-                                      habitica)
+                                      habitica
+                                      org-pomodoro)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
