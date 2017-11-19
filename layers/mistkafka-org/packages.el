@@ -71,21 +71,21 @@
 
       ;; 用於加密的 GPG 金鑰
       ;; 可以設定任何 ID 或是設成 nil 來使用對稱式加密 (symmetric encryption)
-      (setq org-crypt-key nil)
+      (setq org-crypt-key "193E92ED")
       ;; >>>>>>>>>>>>>>>>>>>> org-crypt end
 
       ;; <<<<<<<<<<<<<<<<<<<< org-pomodoro
       ;; http://guleilab.com/2016/05/05/OrgPomodoroNotifier/
       (add-hook 'org-pomodoro-finished-hook
                 (lambda ()
-                  (system-notify "Pomodoro completed!" "Time for a break.")))
+                  (system-dialog "Pomodoro completed!" "Time for a break.")))
       (add-hook 'org-pomodoro-break-finished-hook
                 (lambda ()
-                  (system-notify "Pomodoro Short Break Finished" "Ready for Another?")))
+                  (system-dialog "Pomodoro Short Break Finished" "Ready for Another?")))
       (add-hook 'org-pomodoro-long-break-finished-hook
                 (lambda ()
-                  (system-notify "Pomodoro Long Break Finished" "Ready for Another?")))
+                  (system-dialog "Pomodoro Long Break Finished" "Ready for Another?")))
       (add-hook 'org-pomodoro-killed-hook
                 (lambda ()
-                  (system-notify "Pomodoro Killed" "One does not simply kill a pomodoro!")))
+                  (system-dialog "Pomodoro Killed" "One does not simply kill a pomodoro!")))
       )))

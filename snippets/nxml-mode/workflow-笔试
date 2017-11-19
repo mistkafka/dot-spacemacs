@@ -1,0 +1,91 @@
+# -*- mode: snippet -*-
+# name: workflow-笔试
+# key: workflow-writtentest
+# --
+<process id="基础招聘流程">
+    <userTask id="apply" name="应聘" color="#999999">
+        <form model="apply" />
+        <assign>hr</assign>
+        <transition to="longlist"/>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+    <userTask id="writtentest" name="笔试" color="#CC123C">
+        <form model="writtentest" />
+        <assign>hr</assign>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+    <userTask id="longlist" name="筛选通过" color="#CC99CC">
+        <form model="longlist" />
+        <assign>hr</assign>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+    <userTask id="cvsent" name="简历评审" color="#0099CC">
+        <form model="cvsent" />
+        <assign>hr</assign>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+    <userTask id="clientinterview" name="面试" color="#0099CC">
+        <form model="clientinterview" />
+        <assign>hr</assign>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+
+    <userTask id="offersign" name="Offer" color="#FF9999">
+        <form model="offersign" />
+        <assign>hr</assign>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+    <userTask id="onboard" name="入职" color="#FF6666">
+        <form model="onboard" />
+        <assign>hr</assign>
+        <transition to="cvsent"/>
+        <transition to="clientinterview"/>
+        <transition to="offersign"/>
+        <transition to="onboard"/>
+        <transition to="reject"/>
+        <transition to="writtentest"/>
+    </userTask>
+
+    <userTask id="reject" name="拒绝" color="#333333">
+        <form model="reject" />
+        <assign>hr</assign>
+    </userTask>
+
+</process>
+

@@ -114,6 +114,11 @@
                 "-message" message
                 "-activate" "org.gnu.Emacs"))
 
+(defun system-dialog (title message)
+  (call-process "osascript"
+                nil 0 nil
+                "-e" (format "display dialog \"%s\" with title \"%s\"" message title)))
+
 ;; TODO: 抛弃vim改用emacs，range-things不易
 ;;
 ;; (defun mistkafka/private-do-range-things (begin-str, end-str)
