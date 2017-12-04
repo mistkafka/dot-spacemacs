@@ -440,6 +440,13 @@ you should place your code here."
   ;; magit config
   ;;================================================================================
   (setq magit-revision-show-gravatars nil)
+
+  ;;================================================================================
+  ;; bing-dict config
+  ;;================================================================================
+  (setq bing-dict-save-search-result t)
+  (setq bing-dict-org-file "~/gtd/dict.org")
+  (setq bing-dict-add-to-kill-ring t)
   )
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)

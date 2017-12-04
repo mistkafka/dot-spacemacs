@@ -21,6 +21,20 @@
             (quote (("NEXT" :inherit warning)
                     ("PROJECT" :inherit font-lock-string-face))))
 
+      ;; keep inherited tags when archive
+      ;; https://lists.gnu.org/archive/html//emacs-orgmode/2011-01/msg01195.html
+      (defadvice org-archive-subtree
+          (before add-inherited-tags-before-org-archive-subtree activate)
+        "add inherited tags before org-archive-subtree"
+        (org-set-tags-to (org-get-tags-at)))
+
+      (add-to-list 'org-modules 'habit)
+      (setq org-agenda-custom-commands
+            '(("P" "Weekly personal task (withoud the 'work' task )"
+               ((agenda "" ((org-agenda-ndays 7)))) ; views of search
+               ((org-agenda-tag-filter-preset '("-work"))))
+              ))
+
       ;; config logbook
       ;; Save clock data and notes in the LOGBOOK drawer
       (setq org-clock-into-drawer t)

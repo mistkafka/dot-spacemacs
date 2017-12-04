@@ -1,0 +1,115 @@
+# -*- mode: snippet -*-
+# name: 笔试反馈-mvvm
+# key: writtentest-mvvm
+# --
+<process id="基础招聘流程">
+    <userTask id="apply" name="应聘" color="#999999">
+        <form model="apply" />
+        <assign>hr</assign>
+        <transition to="longlist" formModel="longlist" quickAdd="1"/>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="writtentest" formModel="writtentest"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="reject" formModel="reject"/>
+    </userTask>
+
+    <userTask id="writtentest" name="笔试" color="#C7CAF0">
+        <form model="writtentest" />
+        <assign>hr</assign>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="reject" formModel="reject"/>
+        <transition to="writtentest" formModel="writtentest"/>
+    </userTask>
+
+    <userTask id="longlist" name="筛选通过" color="#A7CEF0">
+        <form model="longlist" />
+        <assign>hr</assign>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="writtentest" formModel="writtentest"/>
+        <transition to="reject" formModel="reject"/>
+    </userTask>
+
+    <userTask id="cvsent" name="简历评审" color="#76B2E7">
+        <form model="cvsent" />
+        <assign>hr</assign>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="writtentest" formModel="writtentest"/>
+        <transition to="reject" formModel="reject"/>
+    </userTask>
+
+    <userTask id="clientinterview" name="面试" color="#0070D2">
+        <form model="clientinterview" />
+        <assign>hr</assign>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="writtentest" formModel="writtentest"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="reject" formModel="reject"/>
+    </userTask>
+
+
+    <userTask id="offersign" name="Offer" color="#FFB75D">
+        <form model="offersign" />
+        <assign>hr</assign>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="writtentest" formModel="writtentest"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="reject" formModel="reject"/>
+    </userTask>
+
+    <userTask id="onboard" name="入职" color="#C23934">
+        <form model="onboard" />
+        <assign>hr</assign>
+        <transition to="cvsent" formModel="cvsent"/>
+        <transition to="clientinterview" formModel="clientinterview"/>
+        <transition to="writtentest" formModel="writtentest"/>
+        <transition to="offersign" formModel="offersign"/>
+        <transition to="onboard" formModel="onboard"/>
+        <transition to="reject" formModel="reject"/>
+    </userTask>
+
+    <userTask id="reject" name="拒绝" color="#000000">
+        <form model="reject" />
+        <transition to="writtentest" formModel="writtentest"/>
+        <assign>hr</assign>
+    </userTask>
+
+    <kanban>
+        <kanbanitem name="HR筛选" key="apply">
+            <kanbanquery>apply</kanbanquery>
+            <kanbanquery>longlist</kanbanquery>
+        </kanbanitem>
+        <kanbanitem name="简历评审" key="cvsent">
+            <kanbanquery>cvsent</kanbanquery>
+        </kanbanitem>
+        <kanbanitem name="面试" key="clientinterview">
+            <kanbanquery>clientinterview</kanbanquery>
+        </kanbanitem>
+        <kanbanitem name="Offer" key="offersign">
+            <kanbanquery>offersign</kanbanquery>
+        </kanbanitem>
+        <kanbanitem name="入职" key="onboard">
+            <kanbanquery>onboard</kanbanquery>
+        </kanbanitem>
+        <kanbanitem name="拒绝" key="reject">
+            <kanbanquery>reject</kanbanquery>
+        </kanbanitem>
+
+    </kanban>
+
+</process>
+
