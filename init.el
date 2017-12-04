@@ -146,7 +146,7 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((agenda . 7)
+   dotspacemacs-startup-lists '((recents . 3)
                                 (bookmarks . 7)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events. (default t)
