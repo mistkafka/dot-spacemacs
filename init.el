@@ -29,9 +29,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(markdown
-     yaml
-     treemacs
+   '(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -40,6 +38,7 @@ This function should only modify configuration layer settings."
 
      ;; Text, Blog
      org
+     markdown
 
      ;; programming language
      sql
@@ -51,11 +50,18 @@ This function should only modify configuration layer settings."
      html
      emacs-lisp
      common-lisp
+
+     ;; colors
+     colors
+
+     ;; file extensions
      nginx
      syntax-checking
 
      ;; emacs tools
      ;; helm
+     treemacs
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
      ivy
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
@@ -64,10 +70,6 @@ This function should only modify configuration layer settings."
      ;; tools
      git
      restclient
-
-     ;; fun
-     xkcd
-     games
 
      ;; Mis
      osx
