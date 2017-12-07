@@ -54,7 +54,8 @@ This function should only modify configuration layer settings."
      syntax-checking
 
      ;; emacs tools
-     helm
+     ;; helm
+     ivy
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       :disabled-for org markdown)
