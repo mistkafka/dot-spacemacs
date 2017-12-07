@@ -46,7 +46,8 @@ This function should only modify configuration layer settings."
      python
      javascript
      react
-     typescript
+     (typescript :variables
+                 typescript-fmt-on-save nil)
      html
      emacs-lisp
      common-lisp
