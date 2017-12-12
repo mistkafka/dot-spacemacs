@@ -13,7 +13,11 @@
                 nil 0 nil
                 "login-customer-system" clientIdOrCode))
 
-(defconst PROJECT-ROOT-URL "https://client.gllue.com/crm/projecttask/detail?id=")
+(defun gllue-cli/login-client ()
+  (interactive)
+  (call-process "gllue-cli"
+                nil 0 nil
+                (format "login-client -e %s -p %s" CLIENT-EMAIL CLIENT-PASSWORD)))
 
 (defun gllue/open-project-task(id &optional browser)
   "Open gllue project task detail of ID.
@@ -35,3 +39,19 @@ If BROWSER is provated, use the BROWSER open the link."
     (if (not (equal 0 id))
         (gllue/open-project-task id)
       (message "未捕获任务ID"))))
+
+(defun gllue/fetch-project-task-detail (id)
+  (let* ((json-object-type 'hash-table)
+         (json-array-type 'list)
+         (json-key-type 'string))
+    (nth 0 (json-read-from-string
+            (shell-command-to-string (format "gllue-cli project-task-detail %s" id))))))
+
+(defun gllue/auto-gen-commit-message ()
+  (interactive)
+  (let* ((branch (magit-get-current-branch))
+         (branch-parts (split-string branch "_"))
+         (emoji (nth 1 branch-parts))
+         (project-task-id (nth 2 branch-parts)))
+    (insert (format ":%s: [#%s] " emoji project-task-id))
+    (insert (gethash "title" (gllue/fetch-project-task-detail project-task-id)))))
