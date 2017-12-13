@@ -28,7 +28,6 @@ If BROWSER is provated, use the BROWSER open the link."
     (unless browser
       (setq browser "Google Chrome"))
     (setq cmd (format "%s -a \"%s\"" cmd browser))
-    (kill-new cmd)
     (shell-command cmd)))
 
 (defun gllue/open-project-task-at-point()
@@ -54,4 +53,6 @@ If BROWSER is provated, use the BROWSER open the link."
          (emoji (nth 1 branch-parts))
          (project-task-id (nth 2 branch-parts)))
     (insert (format ":%s: [#%s] " emoji project-task-id))
-    (insert (gethash "title" (gllue/fetch-project-task-detail project-task-id)))))
+    (if (not (equal 0 (string-to-number project-task-id)))
+        (insert (gethash "title" (gllue/fetch-project-task-detail project-task-id)))
+      (message "不是合法的Project ID，跳过拉取任务Title。"))))
