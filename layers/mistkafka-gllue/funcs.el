@@ -56,3 +56,12 @@ If BROWSER is provated, use the BROWSER open the link."
     (if (not (equal 0 (string-to-number project-task-id)))
         (insert (gethash "title" (gllue/fetch-project-task-detail project-task-id)))
       (message "不是合法的Project ID，跳过拉取任务Title。"))))
+
+(defun gllue/merge-request ()
+  (interactive)
+  (ivy-read
+   "%d Assigner: "
+   GLLUE-ASSIGNERS
+   :action (lambda (assigner)
+             (let ((id (nth 0 (split-string assigner " "))))
+               (shell-command-to-string (format "gllue-cli merge-request -a %s" id))))))
