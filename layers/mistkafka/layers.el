@@ -5,4 +5,5 @@
                                       mistkafka-ivy
                                       mistkafka-python
                                       mistkafka-gllue
+                                      mistkafka-ui
                                       ))
