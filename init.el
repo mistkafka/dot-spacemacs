@@ -47,6 +47,7 @@ This function should only modify configuration layer settings."
      react
      (typescript :variables
                  typescript-fmt-on-save nil)
+     java
      html
      emacs-lisp
      common-lisp
