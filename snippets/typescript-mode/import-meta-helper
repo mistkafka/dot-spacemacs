@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: import-meta-helper
+# key: import_metahelper
+# --
+
+import { $0 } from 'component-helper/meta-fields-helper/types/$1';
