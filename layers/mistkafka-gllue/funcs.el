@@ -13,12 +13,6 @@
                 nil 0 nil
                 "login-customer-system" clientIdOrCode))
 
-(defun gllue-cli/login-client ()
-  (interactive)
-  (call-process "gllue-cli"
-                nil 0 nil
-                (format "login-client -e %s -p %s" CLIENT-EMAIL CLIENT-PASSWORD)))
-
 (defun gllue/open-project-task(id &optional browser)
   "Open gllue project task detail of ID.
 If BROWSER is provated, use the BROWSER open the link."
