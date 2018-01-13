@@ -17,3 +17,9 @@
 ;; 但是我更喜欢通过搜索layout的名称来切换layout
 (spacemacs/set-leader-keys "l" 'spacemacs/ivy-spacemacs-layouts)
 (spacemacs/set-leader-keys "L" 'spacemacs/layouts-transient-state/body)
+
+
+;; projectile-find-file比较慢！使用counsel-git代替
+(spacemacs/set-leader-keys "pf" 'counsel-git)
+
+(spacemacs/set-leader-keys "pF" 'counsel-git-grep)
