@@ -489,6 +489,13 @@ you should place your code here."
                 :weight 'normal
                 :slant 'normal
                 :size 14.5)))
+
+  ;;================================================================================
+  ;; gpg config
+  ;;================================================================================
+  (require 'epa-file)
+  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg1"))
+  (epa-file-enable)
   )
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
