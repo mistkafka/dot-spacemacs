@@ -58,6 +58,20 @@
   (mistkafka/private-copy-file-name-to-clipboard
    (mistkafka/private-get-file-name-in-jsroot)))
 
+(defun mistkafka/copy-current-file-to-current-path-like-target ()
+  "Copy current file to target path, use current path as the template."
+  (interactive)
+  (let ((current-file-path (mistkafka/private-get-file-name))
+        (target-file-path)
+        (target-file-directory))
+    (setq target-file-path (ivy-read "Target Path: " nil
+                                     :initial-input current-file-path))
+    (setq target-file-directory (file-name-directory target-file-path))
+    (unless (file-exists-p target-file-directory)
+      (dired-create-directory target-file-directory))
+    (copy-file current-file-path target-file-path)
+    (message "Copy current file to %s" target-file-path)))
+
 (defun mistkafka/insert-currrent-date ()
   (interactive)
   (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
