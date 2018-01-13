@@ -43,7 +43,7 @@ If BROWSER is provated, use the BROWSER open the link."
 (defun gllue/auto-gen-commit-message ()
   (interactive)
   (let* ((branch (magit-get-current-branch))
-         (branch-parts (split-string branch "_"))
+         (branch-parts (split-string branch "-"))
          (emoji (nth 1 branch-parts))
          (project-task-id (nth 2 branch-parts)))
     (insert (format ":%s: [#%s] " emoji project-task-id))
