@@ -91,8 +91,7 @@ If BROWSER is provated, use the BROWSER open the link."
           (gethash "title" project-task)
           (gethash "__name__" (gethash "addedBy" project-task))))
 
-;; (setq done-project-task-in-today-gql "owner__eq=%7B%7Buser.id%7D%7D&(is_deleted__eq=1|is_deleted__eq=)&(status__eq=Test|status__eq=Release)&projecttaskcomment_set__content__icontains=mistkafka%3Cmistkafka%40gmail.com%3E&lastUpdateDate__today=")
-(setq done-project-task-in-today-gql "owner__eq=%7B%7Buser.id%7D%7D&(is_deleted__eq=1|is_deleted__eq)&(status__eq=Test|status__eq=Release)&lastUpdateDate__this_week&projecttaskcomment_set__content__icontains=mistkafka%3Cmistkafka%40gmail.com%3E")
+(setq done-project-task-in-today-gql "owner__eq=%7B%7Buser.id%7D%7D&(is_deleted__eq=1|is_deleted__eq=)&(status__eq=Test|status__eq=Release)&projecttaskcomment_set__content__icontains=mistkafka%3Cmistkafka%40gmail.com%3E&lastUpdateDate__today=")
 (defun gllue/insert-done-project-task-in-today ()
   (interactive)
   (let ((project-tasks (gllue/fetch-project-tasks-with-gql done-project-task-in-today-gql)))
