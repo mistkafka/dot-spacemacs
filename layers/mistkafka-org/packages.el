@@ -14,12 +14,17 @@
       (setq org-todo-keywords
             (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d@/!)")
                     (sequence "PROJECT(p)" "|" "DONE(d@/!)" "CANCELLED(c@/!)")
-                    (sequence "WAITING(w@/!)" "DELEGATED(e!)" "HOLD(h)" "|" "CANCELLED(c@/!)")))
+                    (sequence "WAITING(w@/!)" "DELEGATED(e!)" "HOLD(h)" "|" "CANCELLED(c@/!)")
+                    (sequence "开发(D)" "|" "Code Review(C)" "测试(T)" "待发布(R)" "归档(S)" "其它(O)")))
             org-todo-repeat-to-state "NEXT")
 
       (setq org-todo-keyword-faces
             (quote (("NEXT" :inherit warning)
-                    ("PROJECT" :inherit font-lock-string-face))))
+                    ("PROJECT" :inherit font-lock-string-face)
+                    ("开发" :foreground "#0080c0")
+                    ("Code Review" :foreground "#ff6fcf")
+                    ("测试" :foreground "#ff8000")
+                    ("待发布" :foreground "#ff6666"))))
 
       ;; keep inherited tags when archive
       ;; https://lists.gnu.org/archive/html//emacs-orgmode/2011-01/msg01195.html
