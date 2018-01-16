@@ -83,9 +83,11 @@ If BROWSER is provated, use the BROWSER open the link."
      project-tasks)))
 
 (defun gllue/format-projet-task (project-task)
-  (format "* #%d: %s %s\n  :PROPERTIES:\n  :Added By: %s\n  :END:\n\n"
-          (gethash "id" project-task)
+  (format "* %s %s: %s\n  :PROPERTIES:\n  :Added By: %s\n  :END:\n\n"
           (gethash "__name__" (gethash "status" project-task))
+          (format "[[%s][#%d]]"
+                  (format "%s%d" PROJECT-ROOT-URL (gethash "id" project-task))
+                  (gethash "id" project-task))
           (gethash "title" project-task)
           (gethash "__name__" (gethash "addedBy" project-task))))
 
@@ -150,3 +152,25 @@ If BROWSER is provated, use the BROWSER open the link."
     (setq res (json-read-from-string
                (shell-command-to-string (format "gllue-cli get-project-task-list \"%s\"" gql))))
     (gethash "list" res)))
+
+(defun gllue/narrow-fucking-gllue-vue-template-string-at-point ()
+  "真搞不懂，为什么要那么写html"
+  (interactive)
+  (let* ((find-region)
+         (template-string-start)
+         (template-string-end))
+
+    (setq find-region (evil-select-quote ?\` nil nil nil 1))
+    (if find-region
+        (progn
+          (setq template-string-start (nth 0 find-region))
+          (setq template-string-end (nth 1 find-region))
+          (narrow-to-region template-string-start template-string-end)
+          (html-mode)
+          (message "进入narrow编辑模式，编辑完成通过`gllue/narrow-widen-to-typescript-mode`退出"))
+      (message "没有找到template string。"))))
+
+(defun gllue/narrow-widen-to-typescript-mode ()
+  (interactive)
+  (widen)
+  (typescript-mode))
