@@ -58,6 +58,12 @@
   (mistkafka/private-copy-file-name-to-clipboard
    (mistkafka/private-get-file-name-in-jsroot)))
 
+(defun mistkafka/copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (mistkafka/private-copy-file-name-to-clipboard
+   (file-name-nondirectory (mistkafka/private-get-file-name))))
+
 (defun mistkafka/copy-current-file-to-current-path-like-target ()
   "Copy current file to target path, use current path as the template."
   (interactive)
