@@ -173,3 +173,59 @@ If BROWSER is provated, use the BROWSER open the link."
   (interactive)
   (widen)
   (typescript-mode))
+
+
+(defun gllue/edit-gllue-vue-template-string-at-point ()
+  (interactive)
+  (let* ((find-region)
+         (template-string-start)
+         (template-string-end)
+         (tmp-buffer-name)
+         (tmp-buffer)
+         (current-buffer-name)          ; buffer name会变，所以可能导致“过得去” “回不来”
+         (edit-content))
+
+    (setq find-region (evil-select-quote ?\` nil nil nil 1))
+    (if find-region
+        (progn
+          (setq template-string-start (nth 0 find-region))
+          (setq template-string-end (nth 1 find-region))
+
+          (setq edit-content (buffer-substring-no-properties template-string-start template-string-end))
+
+          (setq current-buffer-name (buffer-name))
+          (setq tmp-buffer-name (format "*- vue-template-editor: %s__%d__%d -*" current-buffer-name template-string-start template-string-end))
+          (setq tmp-buffer (generate-new-buffer tmp-buffer-name))
+
+          (switch-to-buffer tmp-buffer)
+          (insert edit-content)
+          (web-mode)
+          (message "进入narrow编辑模式，编辑完成通过`gllue/save-current-gllue-vue-template-string`退出"))
+      (message "没有找到template string。"))))
+
+(defun gllue/save-current-gllue-vue-template-string ()
+  "Bug: 用buffer名称来存储origin-string-start-point跟origin-string-end-point会一个问题，只能保存一次，第二次保存的时候origin-string-end-point其实已经变了！"
+
+  (interactive)
+  (let* ((current-buffer-name (buffer-name))
+         (origin-infos)
+         (origin-buffer-name)
+         (origin-string-start-point)
+         (origin-string-end-point)
+         (edited-content (buffer-substring-no-properties (point-min) (point-max))))
+
+    (setq origin-infos (split-string
+                        (s-replace " -*" "" (s-replace "*- vue-template-editor: " "" current-buffer-name))
+                        "__"))
+
+    (setq origin-buffer-name (nth 0 origin-infos))
+    (setq origin-string-start-point (string-to-number (nth 1 origin-infos)))
+    (setq origin-string-end-point (string-to-number (nth 2 origin-infos)))
+
+    (set-buffer origin-buffer-name)
+    (delete-region origin-string-start-point origin-string-end-point)
+    (goto-char origin-string-start-point)
+    (insert edited-content)
+    (save-buffer)
+    (kill-buffer current-buffer-name)
+    (message "回写成功！")))
