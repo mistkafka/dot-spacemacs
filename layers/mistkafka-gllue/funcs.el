@@ -174,7 +174,6 @@ If BROWSER is provated, use the BROWSER open the link."
   (widen)
   (typescript-mode))
 
-
 (defun gllue/edit-gllue-vue-template-string-at-point ()
   (interactive)
   (let* ((find-region)
@@ -182,7 +181,8 @@ If BROWSER is provated, use the BROWSER open the link."
          (template-string-end)
          (tmp-buffer-name)
          (tmp-buffer)
-         (current-buffer-name)          ; buffer name会变，所以可能导致“过得去” “回不来”
+         (current-buffer-name)
+         (current-buffer-ins)
          (edit-content))
 
     (setq find-region (evil-select-quote ?\` nil nil nil 1))
@@ -194,38 +194,46 @@ If BROWSER is provated, use the BROWSER open the link."
           (setq edit-content (buffer-substring-no-properties template-string-start template-string-end))
 
           (setq current-buffer-name (buffer-name))
-          (setq tmp-buffer-name (format "*- vue-template-editor: %s__%d__%d -*" current-buffer-name template-string-start template-string-end))
+          (setq current-buffer-ins (current-buffer))
+          (setq tmp-buffer-name (format "*- vue-template-editor: %s -*" current-buffer-name))
           (setq tmp-buffer (generate-new-buffer tmp-buffer-name))
-
           (switch-to-buffer tmp-buffer)
+
+          ;; 在没有file的buffer里执行web-mode会报错，导致后续语句全挂了
+          (ignore-errors (web-mode))
           (insert edit-content)
-          (web-mode)
+
+          ;; 切换model会重置local variable，所以只能在切换到web-mode后执行
+          (setq-local gllue/vue-template-editor-origin-buffer--local current-buffer-ins)
+          (setq-local gllue/vue-template-editor-origin-string-start--local template-string-start)
+
           (message "进入narrow编辑模式，编辑完成通过`gllue/save-current-gllue-vue-template-string`退出"))
       (message "没有找到template string。"))))
 
 (defun gllue/save-current-gllue-vue-template-string ()
-  "Bug: 用buffer名称来存储origin-string-start-point跟origin-string-end-point会一个问题，只能保存一次，第二次保存的时候origin-string-end-point其实已经变了！"
-
   (interactive)
   (let* ((current-buffer-name (buffer-name))
          (origin-infos)
          (origin-buffer-name)
          (origin-string-start-point)
          (origin-string-end-point)
+         (gllue/vue-template-editor-origin-string-start gllue/vue-template-editor-origin-string-start--local)
+         (gllue/vue-template-editor-origin-string-end)
          (edited-content (buffer-substring-no-properties (point-min) (point-max))))
 
-    (setq origin-infos (split-string
-                        (s-replace " -*" "" (s-replace "*- vue-template-editor: " "" current-buffer-name))
-                        "__"))
+    (with-current-buffer gllue/vue-template-editor-origin-buffer--local
+      (goto-char gllue/vue-template-editor-origin-string-start)
+      (setq gllue/vue-template-editor-origin-string-end (nth 1 (evil-select-quote ?\` nil nil nil 1)))
+      (delete-region gllue/vue-template-editor-origin-string-start gllue/vue-template-editor-origin-string-end)
+      (insert edited-content)
+      (save-buffer)
+      (message "回写成功！"))))
 
-    (setq origin-buffer-name (nth 0 origin-infos))
-    (setq origin-string-start-point (string-to-number (nth 1 origin-infos)))
-    (setq origin-string-end-point (string-to-number (nth 2 origin-infos)))
-
-    (set-buffer origin-buffer-name)
-    (delete-region origin-string-start-point origin-string-end-point)
-    (goto-char origin-string-start-point)
-    (insert edited-content)
-    (save-buffer)
-    (kill-buffer current-buffer-name)
-    (message "回写成功！")))
+(defun gllue/kill-all-vue-template-edit-buffer ()
+  (interactive)
+  (mapcar
+   (lambda (buffer)
+     (when (s-starts-with? "*- vue-template-editor: " (buffer-name buffer))
+       (kill-buffer buffer)))
+   (buffer-list))
+  (message "已清除所有vue template editor buffer"))
