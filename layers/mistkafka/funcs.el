@@ -139,6 +139,15 @@
                 nil 0 nil
                 "-e" (format "display dialog \"%s\" with title \"%s\"" message title)))
 
+(defun mistkafka/kill-all-secret-buffer ()
+  (interactive)
+  (mapcar
+   (lambda (buffer)
+     (when (s-ends-with? ".gpg" (buffer-name buffer))
+       (kill-buffer buffer)))
+   (buffer-list))
+  (message "已清除所有gpg buffer"))
+
 ;; TODO: 抛弃vim改用emacs，range-things不易
 ;;
 ;; (defun mistkafka/private-do-range-things (begin-str, end-str)
