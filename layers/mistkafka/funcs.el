@@ -171,3 +171,28 @@
 ;;   "Range the string at point with wrapper THING"
 ;;   (interactive "sWrapper with things:")
 ;;   (mistkafka/private-range-things things))
+
+
+;; copy from: http://oremacs.com/2015/04/19/git-grep-ivy/
+(defun mistkafka/counsel-git-grep-function (string &optional _pred &rest _u)
+  "Grep in the current git repository for STRING."
+  (split-string
+   (shell-command-to-string
+    (format
+     "git --no-pager grep --full-name -n --no-color -i -e \"%s\""
+     string))
+   "\n"
+   t))
+(defun mistkafka/counsel-git-grep-current-dir ()
+  "Grep for a string in the current git repository."
+  (interactive)
+  (let ((default-directory (locate-dominating-file
+                            default-directory ".git"))
+        (insert default-directory)
+        (val (ivy-read "pattern: " 'mistkafka/counsel-git-grep-function))
+        lst)
+    (when val
+      (setq lst (split-string val ":"))
+      (find-file (car lst))
+      (goto-char (point-min))
+      (forward-line (1- (string-to-number (cadr lst)))))))
