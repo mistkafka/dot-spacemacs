@@ -196,3 +196,19 @@
       (find-file (car lst))
       (goto-char (point-min))
       (forward-line (1- (string-to-number (cadr lst)))))))
+
+(defun mistkafka/apple-speech--region/at-point-word/user-input ()
+  "Speech region content.
+Or word at point.
+Or prompt user input."
+  (interactive)
+  (let ((content))
+    (cond ((region-active-p) (setq content (buffer-substring-no-properties
+                          (region-beginning)
+                          (region-end))))
+           ((word-at-point) (setq content (word-at-point)))
+           (t (setq content (ivy-read "Speech Content: " nil))))
+
+    (call-process "osascript"
+                  nil 0 nil
+                  "-e" (format "say \"%s\"" content))))
