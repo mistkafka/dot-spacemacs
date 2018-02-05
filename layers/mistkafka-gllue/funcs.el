@@ -237,3 +237,18 @@ If BROWSER is provated, use the BROWSER open the link."
        (kill-buffer buffer)))
    (buffer-list))
   (message "已清除所有vue template editor buffer"))
+
+(defun gllue/private-get-frontend-file-name-as-module-name ()
+  (let ((file-name-in-project (mistkafka/private-get-file-name-in-project))
+        (component-herlper-prefix "/assets/component-helper/")
+        (component-view-prefix "/assets/component-view/")
+        (rslt ""))
+    (setq rslt (cond ((s-prefix? "/assets/component-view/" file-name-in-project) (s-replace component-view-prefix "component!" file-name-in-project))
+                     ((s-prefix? "/assets/component-helper/" file-name-in-project) (s-replace component-herlper-prefix "component-helper/" file-name-in-project))))
+    (setq rslt (s-replace ".ts" "" rslt))
+    rslt))
+
+(defun gllue/copy-frontend-file-name-as-module-name ()
+  (interactive)
+  (mistkafka/private-copy-file-name-to-clipboard
+   (gllue/private-get-frontend-file-name-as-module-name)))
