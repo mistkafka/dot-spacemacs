@@ -212,3 +212,9 @@ Or prompt user input."
     (call-process "osascript"
                   nil 0 nil
                   "-e" (format "say \"%s\"" content))))
+
+
+(defun mistkafka/alias-toggle-virtual-multiple-line ()
+  "alias command for 'toggle-truncate-lines."
+  (interactive)
+  (toggle-truncate-lines))
