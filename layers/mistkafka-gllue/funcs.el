@@ -51,6 +51,12 @@ If BROWSER is provated, use the BROWSER open the link."
         (insert (gethash "title" (gllue/fetch-project-task-detail project-task-id)))
       (message "不是合法的Project ID，跳过拉取任务Title。"))))
 
+(defun gllue/inster-commit-message-by-project-task-id (project-task-id)
+  (interactive)
+  (unless project-task-id
+    (setq project-task-id (ivy-read "Project TAsk Id: " nil)))
+  (insert (gethash "title" (gllue/fetch-project-task-detail project-task-id))))
+
 (defun gllue/merge-request ()
   (interactive)
   (ivy-read
@@ -252,3 +258,11 @@ If BROWSER is provated, use the BROWSER open the link."
   (interactive)
   (mistkafka/private-copy-file-name-to-clipboard
    (gllue/private-get-frontend-file-name-as-module-name)))
+
+(defun gllue/insert-field-trans-item ()
+  (interactive)
+  (let ((trans-key nil)
+        (content nil))
+    (setq trans-key (ivy-read "Trans item key: " nil))
+    (setq content (s-replace "__KEY__" trans-key "\"__KEY__\": {\n        \"en\": \"__KEY__\",\n        \"cn\": \"__KEY__\",\n        \"zh_TW\": \"__KEY__\"\n    },\n"))
+    (insert content)))
