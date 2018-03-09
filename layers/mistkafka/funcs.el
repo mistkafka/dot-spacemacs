@@ -218,3 +218,14 @@ Or prompt user input."
   "alias command for 'toggle-truncate-lines."
   (interactive)
   (toggle-truncate-lines))
+
+
+(defun mistkafka/counsel-git-gitmoji ()
+  "search and insert gitmoji"
+  (interactive)
+  (let (emoji-selected-raw-str
+        emoji)
+    (setq emoji-selected-raw-str (ivy-read "%d search gitmoji: " MISTKAFKA-GITMOJIS))
+    (setq emoji (nth 1 (s-match "^\\(:[a-zA-Z_]*:\\) .*" emoji-selected-raw-str)))
+    (insert emoji)
+    ))
